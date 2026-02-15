@@ -89,7 +89,14 @@ function parse(tokens) {
       });
 
       i += 4;
-    } else {
+    } else if (token.type === "HELP") {
+      ast.push({
+        type: "HelpCommand",
+      });
+      i += 1;
+    }
+
+    else {
       i++;
     }
   }

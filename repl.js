@@ -63,6 +63,15 @@ function interpretLine(ast) {
     if (node.type === "PrintExpression") {
       console.log(colors.green + evalBinary(node.expression) + colors.reset);
     }
+
+    if (node.type === "HelpCommand") {
+      console.log(colors.magenta + "📜 Available Commands:");
+      console.log(colors.yellow + "bsdk          -> declare variable");
+      console.log(colors.yellow + "badalbsdk     -> update variable");
+      console.log(colors.yellow + "likhbsdk      -> print variable");
+      console.log(colors.yellow + "batabsdk      -> print expression");
+      console.log(colors.yellow + "madadbsdk     -> show help" + colors.reset);
+    }
   }
 }
 

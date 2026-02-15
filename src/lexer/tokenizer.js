@@ -13,6 +13,10 @@ function tokenize(input) {
     else if (word === "badalbsdk") tokens.push({ type: "UPDATE" });
     else if (word === "likhbsdk") tokens.push({ type: "PRINT_VAR" });
     else if (word === "batabsdk") tokens.push({ type: "PRINT_EXPR" });
+    
+    //help
+    else if (word === "madadbsdk") tokens.push({ type: "HELP" });
+
 
     // ===== operators =====
     else if (word === "=") tokens.push({ type: "EQUALS" });

@@ -7,7 +7,7 @@ let historyIndex = -1;
 function tokenize(input) {
   const tokens = [];
   const regex =
-    /\b(bsdk|badalbsdk|likhbsdk|batabsdk)\b|\d+|[a-zA-Z_][a-zA-Z0-9_]*|[+\-*/=]/g;
+    /\b(bsdk|badalbsdk|likhbsdk|batabsdk|madadbsdk)\b|\d+|[a-zA-Z_][a-zA-Z0-9_]*|[+\-*/=]/g;
 
   const matches = input.match(regex) || [];
 
@@ -16,6 +16,7 @@ function tokenize(input) {
     else if (word === "badalbsdk") tokens.push({ type: "UPDATE" });
     else if (word === "likhbsdk") tokens.push({ type: "PRINT_VAR" });
     else if (word === "batabsdk") tokens.push({ type: "PRINT_EXPR" });
+    else if (word === "madadbsdk") tokens.push({ type: "HELP" });
     else if (word === "=") tokens.push({ type: "EQUALS" });
     else if (word === "+") tokens.push({ type: "PLUS" });
     else if (word === "-") tokens.push({ type: "MINUS" });
@@ -84,6 +85,11 @@ function parse(tokens) {
       i += 4;
     }
 
+    else if (t.type === "HELP") {
+      ast.push({ type: "HelpCommand" });
+      i += 1;
+    }
+
     else if (t.type === "UPDATE") {
       const name = tokens[i + 1].value;
       const left = tokens[i + 3];
@@ -92,7 +98,7 @@ function parse(tokens) {
 
       let expr;
 
-      if (op && ["PLUS","MINUS","MULTIPLY","DIVIDE"].includes(op.type)) {
+      if (op && ["PLUS", "MINUS", "MULTIPLY", "DIVIDE"].includes(op.type)) {
         expr = bin(left, op, right);
         i += 6;
       } else {
@@ -108,26 +114,65 @@ function parse(tokens) {
 }
 
 // ================= UI =================
-const editor = document.getElementById("editor");
+const terminalInput = document.getElementById("terminal-input");
 const output = document.getElementById("output");
 
-function printLine(text) {
+function printLine(text, type = 'default') {
   const div = document.createElement("div");
   div.className = "line";
-  div.textContent = text;
+  
+  // Add specific styling classes based on content
+  if (text.includes('📜') || text.includes('->')) {
+    div.className += ' help-text';
+    div.textContent = text;
+  } else if (text.includes('❌') || text.includes('Error')) {
+    div.className += ' error';
+    div.textContent = text;
+  } else if (text.includes('🔥') || text.includes('👋')) {
+    div.className += ' success';
+    div.textContent = text;
+  } else if (typeof text === 'number') {
+    div.className += ' success';
+    div.textContent = text;
+  } else {
+    div.textContent = text;
+  }
+  
   output.appendChild(div);
   output.scrollTop = output.scrollHeight;
 }
 
-function runCode(code) {
-  printLine("bhoslang >> " + code);
+function printCommand(command) {
+  const commandDiv = document.createElement("div");
+  commandDiv.className = "command-line";
+  
+  const promptSpan = document.createElement("span");
+  promptSpan.className = "prompt";
+  promptSpan.textContent = "bhoslang >> ";
+  
+  const commandSpan = document.createElement("span");
+  commandSpan.className = "command-text";
+  commandSpan.textContent = command;
+  
+  commandDiv.appendChild(promptSpan);
+  commandDiv.appendChild(commandSpan);
+  
+  output.appendChild(commandDiv);
+  output.scrollTop = output.scrollHeight;
+}
 
-  const lines = code.split("\n");
+function executeCommand(command) {
+  if (!command.trim()) return;
 
-  for (const line of lines) {
-    if (!line.trim()) continue;
+  // Add to history
+  history.push(command);
+  historyIndex = history.length;
 
-    const tokens = tokenize(line);
+  // Show the command in the output
+  printCommand(command);
+
+  try {
+    const tokens = tokenize(command);
     const ast = parse(tokens);
 
     for (const node of ast) {
@@ -145,46 +190,74 @@ function runCode(code) {
 
       if (node.type === "PrintExpression")
         printLine(evalBinary(node.expression));
+
+      if (node.type === "HelpCommand") {
+        printLine("📜 Available Commands:");
+        printLine("bsdk          -> declare variable");
+        printLine("badalbsdk     -> update variable");
+        printLine("likhbsdk      -> print variable");
+        printLine("batabsdk      -> print expression");
+        printLine("madadbsdk     -> show help");
+      }
     }
+  } catch (err) {
+    printLine("❌ Error: " + err.message);
   }
 }
 
 // ================= KEY HANDLING =================
-editor.addEventListener("keydown", (e) => {
-  // ENTER → run
-  if (e.key === "Enter" && !e.shiftKey) {
+terminalInput.addEventListener("keydown", (e) => {
+  // ENTER → execute command
+  if (e.key === "Enter") {
     e.preventDefault();
-
-    const code = editor.value.trim();
-    if (!code) return;
-
-    history.push(code);
-    historyIndex = history.length;
-
-    try {
-      runCode(code);
-    } catch (err) {
-      printLine("❌ Error: " + err.message);
+    
+    const command = terminalInput.value.trim();
+    if (command) {
+      executeCommand(command);
+      terminalInput.value = "";
     }
-
-    editor.value = "";
   }
 
-  // ↑ history
+  // ↑ history navigation
   if (e.key === "ArrowUp") {
+    e.preventDefault();
     if (historyIndex > 0) {
       historyIndex--;
-      editor.value = history[historyIndex];
+      terminalInput.value = history[historyIndex];
     }
   }
 
-  // ↓ history
+  // ↓ history navigation
   if (e.key === "ArrowDown") {
+    e.preventDefault();
     if (historyIndex < history.length - 1) {
       historyIndex++;
-      editor.value = history[historyIndex];
+      terminalInput.value = history[historyIndex];
     } else {
-      editor.value = "";
+      historyIndex = history.length;
+      terminalInput.value = "";
+    }
+  }
+
+  // TAB → simple completion (could be expanded)
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const current = terminalInput.value;
+    const commands = ["bsdk", "badalbsdk", "likhbsdk", "batabsdk", "madadbsdk"];
+    
+    for (const cmd of commands) {
+      if (cmd.startsWith(current)) {
+        terminalInput.value = cmd;
+        break;
+      }
     }
   }
 });
+
+// Focus input when clicking anywhere in terminal
+document.querySelector('.terminal-content').addEventListener('click', () => {
+  terminalInput.focus();
+});
+
+// Auto-focus on load
+terminalInput.focus();

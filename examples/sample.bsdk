@@ -1,0 +1,9 @@
+bsdk x = 10
+bsdk y = 5
+
+likhbsdk x
+batabsdk x + y
+batabsdk x * y
+
+badalbsdk x = x + y
+likhbsdk x

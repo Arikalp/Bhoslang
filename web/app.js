@@ -121,21 +121,26 @@ function printLine(text, type = 'default') {
   const div = document.createElement("div");
   div.className = "line";
   
+  // Convert to string for consistent handling
+  const textStr = String(text);
+  
   // Add specific styling classes based on content
-  if (text.includes('📜') || text.includes('->')) {
+  if (textStr.includes('bhoslang >>')) {
+    div.innerHTML = `<span class="prompt">${textStr}</span>`;
+  } else if (textStr.includes('📜') || textStr.includes('->')) {
     div.className += ' help-text';
-    div.textContent = text;
-  } else if (text.includes('❌') || text.includes('Error')) {
+    div.textContent = textStr;
+  } else if (textStr.includes('❌') || textStr.includes('Error')) {
     div.className += ' error';
-    div.textContent = text;
-  } else if (text.includes('🔥') || text.includes('👋')) {
+    div.textContent = textStr;
+  } else if (textStr.includes('🔥') || textStr.includes('👋')) {
     div.className += ' success';
-    div.textContent = text;
+    div.textContent = textStr;
   } else if (typeof text === 'number') {
     div.className += ' success';
-    div.textContent = text;
+    div.textContent = textStr;
   } else {
-    div.textContent = text;
+    div.textContent = textStr;
   }
   
   output.appendChild(div);

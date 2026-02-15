@@ -1,0 +1,27 @@
+{
+  "name": "bhoslang",
+  "displayName": "Bhoslang",
+  "description": "Syntax highlighting for Bhoslang language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "bhoslang",
+        "aliases": ["Bhoslang", "bhoslang"],
+        "extensions": [".my"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "bhoslang",
+        "scopeName": "source.bhoslang",
+        "path": "./syntaxes/bhoslang.tmLanguage.json"
+      }
+    ]
+  }
+}

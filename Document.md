@@ -1,119 +1,126 @@
-# 🚀 Bhoslang Language — Phase 1 Documentation
+# 🚀 Bhoslang — Official Documentation (Serious Tech… with Questionable Naming 😌)
 
-Welcome to **Bhoslang Language** — a fun, beginner-friendly custom programming language.
-This document explains all available commands, syntax, and examples for Phase 1.
+Welcome to **Bhoslang** — a lightweight, beginner-friendly programming language designed to make learning interpreters fun.
 
----
-
-# 📌 Overview
-
-Bhoslang Language currently supports:
-
-* Variable declaration
-* Variable update
-* Printing variables
-* Printing expressions
-* Basic arithmetic operations
-
-✅ Beginner friendly
-✅ Whitespace based
-✅ Interpreted language
+If you know basic logic and can type without fear…
+**Congratulations — you are already overqualified.** 🎉
 
 ---
 
-# 🧠 Basic Syntax Rules
+# 🧠 What Bhoslang Can Do (Phase 1)
 
-* Each statement is written on a new line.
-* Keywords are **case-sensitive**.
-* Spaces between tokens are required.
-* Variables are created using `bsdk`.
+Your language currently supports:
+
+✅ Creating variables
+✅ Updating variables
+✅ Printing values
+✅ Performing math (+ − * /)
+✅ Looking suspiciously professional 😎
 
 ---
 
-# 🔥 Commands Reference
+# 📜 Ground Rules (Read or Regret)
+
+Before you start coding like a legend:
+
+* 🔹 Write **one command per line**
+* 🔹 Spaces between tokens are REQUIRED (this is not Python magic)
+* 🔹 Keywords are **case-sensitive**
+* 🔹 Declare variables before using them (trust me on this)
 
 ---
 
-## 🟢 1. Variable Declaration — `bsdk`
+# 🔥 COMMANDS REFERENCE
 
-### ✅ Syntax
+---
+
+## 🟢 `bsdk` — Create a Variable
+
+> Use this when you want the computer to remember something.
+
+### 🧾 Syntax
 
 ```
 bsdk <variable> = <value>
 ```
 
-### ✅ Description
-
-Creates a new variable and assigns a value.
-
-### ✅ Example
+### ✅ Examples
 
 ```
 bsdk x = 10
-bsdk y = 5
+bsdk score = 99
 ```
+
+### 🧠 What Actually Happens
+
+You politely tell memory:
+
+> “Hey, keep this safe. I’ll need it later.”
 
 ---
 
-## 🟡 2. Variable Update — `badalbsdk`
+## 🟡 `badalbsdk` — Update a Variable
 
-### ✅ Syntax
+> Because change is the only constant (and bugs).
+
+### 🧾 Syntax
 
 ```
 badalbsdk <variable> = <expression>
 ```
 
-### ✅ Description
-
-Updates the value of an existing variable.
-
 ### ✅ Examples
 
 ```
 badalbsdk x = 20
-badalbsdk x = x + y
-badalbsdk y = y * 2
+badalbsdk x = x + 5
+badalbsdk score = score * 2
 ```
+
+### 🧠 What It Means
+
+You’re saying:
+
+> “Forget the old value. We’re upgrading.”
 
 ---
 
-## 🔵 3. Print Variable — `likhbsdk`
+## 🔵 `likhbsdk` — Print a Variable
 
-### ✅ Syntax
+> The “just show me the value” command.
+
+### 🧾 Syntax
 
 ```
 likhbsdk <variable>
 ```
 
-### ✅ Description
-
-Prints the value of a variable to the console.
-
 ### ✅ Example
 
 ```
+bsdk x = 10
 likhbsdk x
 ```
 
-### ✅ Output
+### 🖥️ Output
 
 ```
 10
 ```
 
+Nice. Clean. No drama.
+
 ---
 
-## 🟣 4. Print Expression — `batabsdk`
+## 🟣 `batabsdk` — Print an Expression
 
-### ✅ Syntax
+> When you don’t trust your mental math.
+
+### 🧾 Syntax
 
 ```
 batabsdk <value> <operator> <value>
 ```
-
-### ✅ Description
-
-Evaluates and prints a mathematical expression.
 
 ### ✅ Examples
 
@@ -121,22 +128,33 @@ Evaluates and prints a mathematical expression.
 batabsdk x + y
 batabsdk x * y
 batabsdk 10 - 3
+batabsdk 20 / 5
 ```
+
+### 🧠 Translation
+
+You’re basically saying:
+
+> “Dear computer, please be my calculator.”
 
 ---
 
 # 🧮 Supported Operators
 
-| Operator | Meaning        | Example |
+| Operator | What it does   | Example |
 | -------- | -------------- | ------- |
 | `+`      | Addition       | `x + y` |
 | `-`      | Subtraction    | `x - y` |
 | `*`      | Multiplication | `x * y` |
 | `/`      | Division       | `x / y` |
 
+Yes, we kept the math civilised.
+
 ---
 
-# 📄 Sample Program
+# 🎬 Complete Example Program
+
+Copy this into `sample.my` and feel powerful:
 
 ```
 bsdk x = 10
@@ -152,7 +170,7 @@ likhbsdk x
 
 ---
 
-# ▶️ Expected Output
+# 🖥️ Expected Output
 
 ```
 10
@@ -161,47 +179,72 @@ likhbsdk x
 15
 ```
 
----
+If you see this output…
 
-# ⚠️ Current Limitations (Phase 1)
+> 🏆 Congratulations. You are now officially a **Bhoslang developer**.
 
-* No strings support
-* No parentheses in expressions
-* No if/else
-* No loops
-* No error handling for undefined variables
-* Expressions support only binary operations
+Please try to stay humble.
 
 ---
 
-# 🛣️ Roadmap (Planned Features)
+# ⚠️ Current Limitations (a.k.a. Things That Will Break Your Heart)
+
+Right now the language is intentionally simple:
+
+❌ No strings
+❌ No parentheses
+❌ No if/else
+❌ No loops
+❌ Error messages are… optimistic
+
+But don’t worry — upgrades are inevitable.
+
+---
+
+# 🛣️ Roadmap (Where This Madness Is Going)
 
 Future versions may include:
 
-* 🔹 Strings support
-* 🔹 Conditionals (`agarbsdk`, `warna`)
-* 🔹 Loops (`jabtakbsdk`)
-* 🔹 Functions
-* 🔹 Better error messages
-* 🔹 VS Code syntax highlighting
+* 🔥 `agarbsdk` (if/else)
+* 🔥 `jabtakbsdk` (loops)
+* 🔥 string support
+* 🔥 functions
+* 🔥 VS Code syntax highlighting
+* 🔥 possibly world domination 🌍
 
 ---
 
 # 🤝 Contributing
 
-Feel free to:
+Want to make **Bhoslang** even better?
 
-* Improve tokenizer
+You can:
+
+* Improve the tokenizer
 * Add new commands
-* Optimize parser
-* Enhance interpreter
+* Strengthen the parser
+* Make the interpreter faster
+* Or just rename things more creatively 😏
+
+Pull requests welcome.
+
+Judgment optional.
 
 ---
 
 # 🧑‍💻 Author
 
-Built with ❤️ by Sankalp.
+Built with ☕, curiosity, and mild chaos by **Sankalp**.
 
 ---
 
-**Happy Coding! 🚀**
+# 🎉 Final Words
+
+Write code.
+Break things.
+Fix them.
+Repeat.
+
+And remember:
+
+**Every great programming language starts with one slightly questionable keyword.** 🚀

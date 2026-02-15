@@ -14,21 +14,25 @@ function parse(tokens) {
   while (i < tokens.length) {
     const token = tokens[i];
 
+    // =============================
     // bsdk x = 10
+    // =============================
     if (token.type === "DECLARE") {
       const name = tokens[i + 1].value;
-      const value = tokens[i + 3];
+      const valueToken = tokens[i + 3];
 
       ast.push({
         type: "VariableDeclaration",
         name,
-        value,
+        value: valueToken,
       });
 
       i += 4;
     }
 
-    // badalbsdk x = expr
+    // =============================
+    // badalbsdk x = ...
+    // =============================
     else if (token.type === "UPDATE") {
       const name = tokens[i + 1].value;
 
@@ -38,11 +42,16 @@ function parse(tokens) {
 
       let expression;
 
-      if (operator && operator.type.endsWith("PLUS") === false) {
-        // simple assignment
+      // 🔥 CASE 1: simple assignment
+      if (
+        !operator ||
+        !["PLUS", "MINUS", "MULTIPLY", "DIVIDE"].includes(operator.type)
+      ) {
         expression = left;
         i += 4;
-      } else {
+      }
+      // 🔥 CASE 2: binary expression
+      else {
         expression = parseExpression(left, operator, right);
         i += 6;
       }
@@ -54,7 +63,9 @@ function parse(tokens) {
       });
     }
 
+    // =============================
     // likhbsdk x
+    // =============================
     else if (token.type === "PRINT_VAR") {
       ast.push({
         type: "PrintVariable",
@@ -64,7 +75,9 @@ function parse(tokens) {
       i += 2;
     }
 
+    // =============================
     // batabsdk x + y
+    // =============================
     else if (token.type === "PRINT_EXPR") {
       const left = tokens[i + 1];
       const operator = tokens[i + 2];

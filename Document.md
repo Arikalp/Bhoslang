@@ -15,6 +15,7 @@ Your language currently supports:
 ✅ Updating variables
 ✅ Printing values
 ✅ Performing math (+ − * /)
+✅ If/Else statements
 ✅ Looking suspiciously professional 😎
 
 ---
@@ -112,17 +113,17 @@ Nice. Clean. No drama.
 
 ---
 
-## 🟣 `batabsdk` — Print an Expression
+## `batabsdk` — Print an Expression
 
 > When you don’t trust your mental math.
 
-### 🧾 Syntax
+### Syntax
 
 ```
 batabsdk <value> <operator> <value>
 ```
 
-### ✅ Examples
+### Examples
 
 ```
 batabsdk x + y
@@ -131,7 +132,7 @@ batabsdk 10 - 3
 batabsdk 20 / 5
 ```
 
-### 🧠 Translation
+### Translation
 
 You’re basically saying:
 
@@ -139,7 +140,63 @@ You’re basically saying:
 
 ---
 
-# 🧮 Supported Operators
+## `agarbsdk` — If Statement
+
+> When life gives you choices, make decisions programmatically.
+
+### Syntax
+
+```
+agarbsdk <condition>
+<if_block_statements>
+```
+
+### Examples
+
+```
+agarbsdk x == 10
+likhbsdk x
+nahitohbsdk
+likhbsdk 0
+```
+
+### What It Means
+
+You’re saying:
+
+> “If this condition is true, do the following things...”
+
+---
+
+## `nahitohbsdk` — Else Statement
+
+> Plan B for when your if statement fails you.
+
+### Syntax
+
+```
+nahitohbsdk
+<else_block_statements>
+```
+
+### Example
+
+```
+agarbsdk score > 50
+likhbsdk score
+nahitohbsdk
+likhbsdk 0
+```
+
+### Translation
+
+You’re saying:
+
+> “Otherwise, do these other things instead.”
+
+---
+
+# Supported Operators
 
 | Operator | What it does   | Example |
 | -------- | -------------- | ------- |
@@ -147,12 +204,18 @@ You’re basically saying:
 | `-`      | Subtraction    | `x - y` |
 | `*`      | Multiplication | `x * y` |
 | `/`      | Division       | `x / y` |
+| `==`     | Equal to       | `x == y` |
+| `!=`     | Not equal to   | `x != y` |
+| `>`      | Greater than   | `x > y` |
+| `<`      | Less than      | `x < y` |
+| `>=`     | Greater/equal  | `x >= y` |
+| `<=`     | Less/equal     | `x <= y` |
 
-Yes, we kept the math civilised.
+Now we have both math AND comparison operators. We’re basically a real language now.
 
 ---
 
-# 🎬 Complete Example Program
+# Complete Example Program
 
 Copy this into `sample.my` and feel powerful:
 
@@ -166,6 +229,13 @@ batabsdk x * y
 
 badalbsdk x = x + y
 likhbsdk x
+
+# If-Else example
+bsdk age = 25
+agarbsdk age >= 18
+likhbsdk "You can vote!"
+nahitohbsdk
+likhbsdk "Too young to vote"
 ```
 
 ---
@@ -177,6 +247,7 @@ likhbsdk x
 15
 50
 15
+You can vote!
 ```
 
 If you see this output…
@@ -191,26 +262,24 @@ Please try to stay humble.
 
 Right now the language is intentionally simple:
 
-❌ No strings
-❌ No parentheses
-❌ No if/else
-❌ No loops
-❌ Error messages are… optimistic
+ No strings
+ No parentheses
+ No loops
+ Error messages are… optimistic
 
 But don’t worry — upgrades are inevitable.
 
 ---
 
-# 🛣️ Roadmap (Where This Madness Is Going)
+# Roadmap (Where This Madness Is Going)
 
 Future versions may include:
 
-* 🔥 `agarbsdk` (if/else)
-* 🔥 `jabtakbsdk` (loops)
-* 🔥 string support
-* 🔥 functions
-* 🔥 VS Code syntax highlighting
-* 🔥 possibly world domination 🌍
+ `jabtakbsdk` (loops)
+ string support
+ functions
+ VS Code syntax highlighting
+ possibly world domination 
 
 ---
 

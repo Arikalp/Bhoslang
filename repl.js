@@ -20,6 +20,7 @@ const memory = {};
 function getValue(token) {
   if (!token) return 0;
   if (token.type === "NUMBER") return token.value;
+  if (token.type === "STRING") return token.value;
   if (token.type === "IDENTIFIER") return memory[token.value] ?? 0;
   return 0;
 }
@@ -39,6 +40,21 @@ function evalBinary(expr) {
       return left / right;
     default:
       return 0;
+  }
+}
+
+function evalComparison(left, operator, right) {
+  const leftVal = getValue(left);
+  const rightVal = getValue(right);
+
+  switch (operator) {
+    case "EQUAL_EQUAL": return leftVal === rightVal;
+    case "NOT_EQUAL": return leftVal !== rightVal;
+    case "GREATER": return leftVal > rightVal;
+    case "LESS": return leftVal < rightVal;
+    case "GREATER_EQUAL": return leftVal >= rightVal;
+    case "LESS_EQUAL": return leftVal <= rightVal;
+    default: return false;
   }
 }
 
@@ -64,12 +80,42 @@ function interpretLine(ast) {
       console.log(colors.green + evalBinary(node.expression) + colors.reset);
     }
 
+    if (node.type === "IfStatement") {
+      const conditionResult = evalComparison(
+        node.condition.left,
+        node.condition.operator,
+        node.condition.right
+      );
+
+      const blockToExecute = conditionResult ? node.ifBlock : node.elseBlock;
+
+      // Execute the chosen block
+      for (const blockNode of blockToExecute) {
+        if (blockNode.type === "VariableDeclaration")
+          memory[blockNode.name] = getValue(blockNode.value);
+
+        if (blockNode.type === "VariableUpdate")
+          memory[blockNode.name] =
+            blockNode.expression.type === "BinaryExpression"
+              ? evalBinary(blockNode.expression)
+              : getValue(blockNode.expression);
+
+        if (blockNode.type === "PrintVariable")
+          console.log(colors.green + memory[blockNode.name] + colors.reset);
+
+        if (blockNode.type === "PrintExpression")
+          console.log(colors.green + evalBinary(blockNode.expression) + colors.reset);
+      }
+    }
+
     if (node.type === "HelpCommand") {
       console.log(colors.magenta + "📜 Available Commands:");
       console.log(colors.yellow + "bsdk          -> declare variable");
       console.log(colors.yellow + "badalbsdk     -> update variable");
       console.log(colors.yellow + "likhbsdk      -> print variable");
       console.log(colors.yellow + "batabsdk      -> print expression");
+      console.log(colors.yellow + "agarbsdk      -> if statement");
+      console.log(colors.yellow + "nahitohbsdk   -> else statement");
       console.log(colors.yellow + "madadbsdk     -> show help" + colors.reset);
     }
   }

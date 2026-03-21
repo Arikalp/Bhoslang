@@ -21,6 +21,8 @@ It's a beginner-friendly interpreted language that proves you don't need fancy s
 - **Variable Updates** - `badalbsdk x = x + 1` (change is the only constant)
 - **Printing Values** - `likhbsdk x` (shout your variables to the world)
 - **Math Operations** - `batabsdk x + y` (when calculator apps are too mainstream)
+- **If/Else Statements** - `agarbsdk`/`nahitohbsdk` (when life gives you choices)
+- **Comparison Operations** - `==`, `!=`, `>`, `<`, `>=`, `<=` (because sometimes you need to compare)
 - **Help System** - `madadbsdk` (for when you forget everything)
 
 ### ❌ **Currently Broken (Read: Future Features)**
@@ -58,6 +60,8 @@ node index.js examples/sample.bsdk
 | `badalbsdk` | Updates a variable (mid-life crisis) | `badalbsdk x = x + 5` |
 | `likhbsdk` | Prints a variable (show-off mode) | `likhbsdk x` |
 | `batabsdk` | Prints math results (calculator mode) | `batabsdk x * 2` |
+| `agarbsdk` | If statement (when choices must be made) | `agarbsdk x > 10` |
+| `nahitohbsdk` | Else statement (plan B) | `nahitohbsdk` |
 | `madadbsdk` | Shows help (when you're lost) | `madadbsdk` |
 
 ## 🎬 A Complete Program That Does... Something
@@ -72,6 +76,13 @@ batabsdk x * y
 
 badalbsdk x = x + y
 likhbsdk x
+
+# If-Else magic
+bsdk age = 25
+agarbsdk age >= 18
+likhbsdk "Adult"
+nahitohbsdk
+likhbsdk "Minor"
 ```
 
 **Output:**
@@ -80,6 +91,7 @@ likhbsdk x
 15
 50
 15
+Adult
 ```
 
 *See? It's like magic, but with more questionable choices!*
@@ -121,7 +133,7 @@ Bhoslang/
 ## 🛣️ Roadmap (Or: How We Plan to Make It Even Weirder)
 
 ### **Phase 2: The Madness Continues**
-- [ ] `agarbsdk` (if/else statements - because decisions are hard)
+- [x] `agarbsdk` (if/else statements - because decisions are hard)
 - [ ] `jabtakbsdk` (loops - for when you like doing things repeatedly)
 - [ ] String support (words are cool too, we guess)
 - [ ] Functions (proper code reuse, finally)
